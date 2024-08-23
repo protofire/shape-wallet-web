@@ -12,9 +12,11 @@ import TxNonce from '../TxNonce'
 import TxStatusWidget from '../TxStatusWidget'
 import css from './styles.module.css'
 import SafeLogo from '@/public/images/logo-no-text.svg'
+import SafeLogoWhite from '@/public/images/logo-no-text-white.svg'
 import { TxSecurityProvider } from '@/components/tx/security/shared/TxSecurityContext'
 import ChainIndicator from '@/components/common/ChainIndicator'
 import SecurityWarnings from '@/components/tx/security/SecurityWarnings'
+import { useDarkMode } from '@/hooks/useDarkMode'
 
 const TxLayoutHeader = ({
   hideNonce,
@@ -87,6 +89,7 @@ const TxLayout = ({
 
   const steps = Array.isArray(children) ? children : [children]
   const progress = Math.round(((step + 1) / steps.length) * 100)
+  const isDarkMode = useDarkMode()
 
   useEffect(() => {
     setStatusVisible(!isSmallScreen)
@@ -109,7 +112,11 @@ const TxLayout = ({
                 size="large"
                 onClick={toggleStatus}
               >
-                <SafeLogo width={16} height={16} />
+                {isDarkMode ? (
+                  <SafeLogoWhite alt="Safe logo" width={16} height={16} />
+                ) : (
+                  <SafeLogo alt="Safe logo" width={16} height={16} />
+                )}
               </IconButton>
             )}
 

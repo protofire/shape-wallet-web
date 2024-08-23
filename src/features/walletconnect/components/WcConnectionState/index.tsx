@@ -3,17 +3,24 @@ import classNames from 'classnames'
 import type { CoreTypes } from '@walletconnect/types'
 import SafeAppIconCard from '@/components/safe-apps/SafeAppIconCard'
 import SafeLogo from '@/public/images/logo-no-text.svg'
+import SafeLogoWhite from '@/public/images/logo-no-text-white.svg'
 import ConnectionDots from '@/public/images/common/connection-dots.svg'
 import css from './styles.module.css'
+import { useDarkMode } from '@/hooks/useDarkMode'
 
 const WcConnectionState = ({ metadata, isDelete }: { metadata?: CoreTypes.Metadata; isDelete: boolean }) => {
   const name = metadata?.name || 'dApp'
   const icon = metadata?.icons[0] || ''
+  const isDarkMode = useDarkMode()
 
   return (
     <div className={css.container}>
       <div>
-        <SafeLogo alt="Safe logo" width="28px" height="28px" />
+        {isDarkMode ? (
+          <SafeLogoWhite alt="Safe logo" width={28} height={28} />
+        ) : (
+          <SafeLogo alt="Safe logo" width={28} height={28} />
+        )}
 
         <SvgIcon
           component={ConnectionDots}
