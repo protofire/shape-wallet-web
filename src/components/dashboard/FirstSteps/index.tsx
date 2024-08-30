@@ -22,7 +22,6 @@ import { Box, Button, CircularProgress, Divider, FormControlLabel, Grid, Switch,
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined'
 import css from './styles.module.css'
 import ActivateAccountButton from '@/features/counterfactual/ActivateAccountButton'
 
@@ -85,22 +84,6 @@ const ActivationStatusWidget = ({ explorerLink }: { explorerLink?: string }) => 
         </ExternalLink>
       )}
     </StatusCard>
-  )
-}
-
-const UsefulHintsWidget = () => {
-  return (
-    <StatusCard
-      badge={
-        <Typography variant="body2" className={classnames(css.badgeText, css.badgeTextInfo)}>
-          <LightbulbOutlinedIcon fontSize="small" sx={{ mr: 0.5 }} />
-          Did you know
-        </Typography>
-      }
-      title="Explore over 70+ dApps"
-      content="In our Safe App section you can connect your Safe to over 70 dApps directly or via Wallet Connect to interact with any application."
-      completed={false}
-    />
   )
 }
 
@@ -381,9 +364,7 @@ const FirstSteps = () => {
           </Grid>
 
           <Grid item xs={12} md={4}>
-            {isActivating ? (
-              <UsefulHintsWidget />
-            ) : isMultiSig ? (
+            {isActivating && isMultiSig ? (
               <ActivateSafeWidget />
             ) : (
               <FirstTransactionWidget completed={hasOutgoingTransactions} />
