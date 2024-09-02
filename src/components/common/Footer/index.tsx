@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { SvgIcon } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import FileOpenIcon from '@mui/icons-material/FileOpen'
 import { useRouter } from 'next/router'
 import css from './styles.module.css'
 import { AppRoutes } from '@/config/routes'
@@ -27,6 +28,11 @@ const Footer = (): ReactElement | null => {
   return (
     <footer className={css.container}>
       <ul>
+        <li>
+          <ExternalLink href="https://shape.network/" noIcon>
+            <SvgIcon component={FileOpenIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> Shape Network
+          </ExternalLink>
+        </li>
         <li>
           <ExternalLink href={`${packageJson.homepage}/releases/tag/v${packageJson.version}`} noIcon>
             <SvgIcon component={GitHubIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> v{packageJson.version}
