@@ -2,7 +2,7 @@
 <svg id="Layer_9" data-name="Layer 9" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 224.585 224.585">
   <defs>
     <style>
-      .cls-1 {
+      .logo_no_text_white {
         fill: #000;
         stroke: #fff;
         stroke-miterlimit: 10;
@@ -10,5 +10,5 @@
       }
     </style>
   </defs>
-  <circle class="cls-1" cx="112.293" cy="112.293" r="110.793"/>
+  <circle class="logo_no_text_white" cx="112.293" cy="112.293" r="110.793"/>
 </svg>
