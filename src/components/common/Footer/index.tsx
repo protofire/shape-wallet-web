@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { SvgIcon } from '@mui/material'
+import { SvgIcon, Typography } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import FileOpenIcon from '@mui/icons-material/FileOpen'
 import { useRouter } from 'next/router'
@@ -8,6 +8,8 @@ import { AppRoutes } from '@/config/routes'
 import packageJson from '../../../../package.json'
 import ExternalLink from '../ExternalLink'
 import { HELP_CENTER_URL } from '@/config/constants'
+import darkPalette from '@/components/theme/darkPalette'
+import ProtofireLogo from '@/public/images/protofire-logo.svg'
 
 const footerPages = [
   AppRoutes.welcome.index,
@@ -43,6 +45,20 @@ const Footer = (): ReactElement | null => {
           <ExternalLink href={`${packageJson.homepage}/releases/tag/v${packageJson.version}`} noIcon>
             <SvgIcon component={GitHubIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> v{packageJson.version}
           </ExternalLink>
+        </li>
+        <li>
+          <Typography variant="caption">
+            Supported by{' '}
+            <SvgIcon
+              component={ProtofireLogo}
+              inheritViewBox
+              fontSize="small"
+              sx={{ verticalAlign: 'middle', mx: 0.5 }}
+            />
+            <ExternalLink href="https://protofire.io" sx={{ color: darkPalette.primary.main, textDecoration: 'none' }}>
+              Protofire
+            </ExternalLink>
+          </Typography>
         </li>
       </ul>
     </footer>
