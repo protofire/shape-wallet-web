@@ -9,7 +9,7 @@ const FIAT_AMOUNT_COLUMN = 2
 
 let staticSafes = []
 
-describe('Prod tokens tests', () => {
+describe('[PROD] Prod tokens tests', () => {
   const fiatRegex = assets.fiatRegex
 
   before(async () => {
@@ -17,8 +17,6 @@ describe('Prod tokens tests', () => {
   })
   beforeEach(() => {
     cy.visit(constants.prodbaseUrl + constants.BALANCE_URL + staticSafes.SEP_STATIC_SAFE_2)
-    cy.clearLocalStorage()
-    main.acceptCookies()
   })
 
   // TODO: Added to prod

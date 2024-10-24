@@ -8,15 +8,13 @@ let staticSafes = []
 
 const typeMessagesOnchain = msg_data.type.onChain
 
-describe('Onchain Messages tests', () => {
+describe('[PROD] Onchain Messages tests', () => {
   before(async () => {
     staticSafes = await getSafes(CATEGORIES.static)
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.visit(constants.prodbaseUrl + constants.transactionsHistoryUrl + staticSafes.SEP_STATIC_SAFE_10)
-    main.acceptCookies()
   })
 
   // TODO: Added to prod

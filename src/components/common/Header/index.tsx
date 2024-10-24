@@ -8,10 +8,9 @@ import classnames from 'classnames'
 import css from './styles.module.css'
 import ConnectWallet from '@/components/common/ConnectWallet'
 import NetworkSelector from '@/components/common/NetworkSelector'
-import SafeTokenWidget, { getSafeTokenAddress } from '@/components/common/SafeTokenWidget'
+import SafeTokenWidget from '@/components/common/SafeTokenWidget'
 import NotificationCenter from '@/components/notification-center/NotificationCenter'
 import { AppRoutes } from '@/config/routes'
-import useChainId from '@/hooks/useChainId'
 import SafeLogo from '@/public/images/logo.svg'
 import SafeLogoWhite from '@/public/images/logo-text-white.svg'
 import SafeLogoMobile from '@/public/images/logo-no-text.svg'
@@ -24,6 +23,7 @@ import { useHasFeature } from '@/hooks/useChains'
 import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { useDarkMode } from '@/hooks/useDarkMode'
+import { useSafeTokenEnabled } from '@/hooks/useSafeTokenEnabled'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -39,9 +39,8 @@ function getLogoLink(router: ReturnType<typeof useRouter>): Url {
 }
 
 const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
-  const chainId = useChainId()
   const safeAddress = useSafeAddress()
-  const showSafeToken = safeAddress && !!getSafeTokenAddress(chainId)
+  const showSafeToken = useSafeTokenEnabled()
   const router = useRouter()
   const enableWc = useHasFeature(FEATURES.NATIVE_WALLETCONNECT)
   const isDarkMode = useDarkMode()

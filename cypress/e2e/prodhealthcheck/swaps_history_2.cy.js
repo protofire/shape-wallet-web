@@ -9,13 +9,9 @@ let staticSafes = []
 
 const swapsHistory = swaps_data.type.history
 
-describe('Swaps history tests 2', () => {
+describe('[PROD] Swaps history tests 2', () => {
   before(async () => {
     staticSafes = await getSafes(CATEGORIES.static)
-  })
-
-  beforeEach(() => {
-    cy.clearLocalStorage()
   })
 
   // TODO: Added to prod
@@ -23,8 +19,6 @@ describe('Swaps history tests 2', () => {
     cy.visit(
       constants.prodbaseUrl + constants.transactionUrl + staticSafes.SEP_STATIC_SAFE_1 + swaps.swapTxs.buy2actions,
     )
-    main.acceptCookies()
-
     const eq = swaps.createRegex(swapsHistory.oneGNOFull, 'COW')
     const atMost = swaps.createRegex(swapsHistory.forAtMostCow, 'COW')
 
@@ -52,7 +46,6 @@ describe('Swaps history tests 2', () => {
           staticSafes.SEP_STATIC_SAFE_1 +
           swaps.swapTxs.safeAppSwapOrder,
       )
-      main.acceptCookies()
       main.verifyValuesDoNotExist('div', [
         swapsHistory.actionApproveG,
         swapsHistory.actionDepositG,

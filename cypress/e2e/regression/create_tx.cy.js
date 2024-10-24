@@ -24,9 +24,7 @@ describe('Create transactions tests', () => {
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.visit(constants.BALANCE_URL + staticSafes.SEP_STATIC_SAFE_6)
-    main.acceptCookies()
     wallet.connectSigner(signer)
     createtx.clickOnNewtransactionBtn()
     createtx.clickOnSendTokensBtn()
@@ -39,7 +37,6 @@ describe('Create transactions tests', () => {
     createtx.changeNonce(14)
     cy.wait(1000)
     createtx.clickOnSignTransactionBtn()
-    createtx.waitForProposeRequest()
     createtx.clickViewTransaction()
     createtx.verifySingleTxPage()
     createtx.verifyQueueLabel()

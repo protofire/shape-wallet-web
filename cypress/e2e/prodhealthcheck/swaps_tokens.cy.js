@@ -11,15 +11,13 @@ const signer = walletCredentials.OWNER_4_PRIVATE_KEY
 
 let iframeSelector = `iframe[src*="${constants.swapWidget}"]`
 
-describe('[SMOKE] Swaps token tests', () => {
+describe('[PROD] Swaps token tests', () => {
   before(async () => {
     staticSafes = await getSafes(CATEGORIES.static)
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.visit(constants.prodbaseUrl + constants.BALANCE_URL + staticSafes.SEP_STATIC_SAFE_1)
-    main.acceptCookies()
   })
 
   // TODO: Added to prod

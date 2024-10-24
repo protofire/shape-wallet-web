@@ -21,15 +21,13 @@ const INVALID_ADDRESS_ERROR_MSG = 'Address given is not a valid Safe address'
 const OWNER_ENS_DEFAULT_NAME = 'test20.eth'
 const OWNER_ADDRESS = constants.EOA
 
-describe('Load Safe tests', () => {
+describe('[PROD] Load Safe tests', () => {
   before(async () => {
     staticSafes = await getSafes(CATEGORIES.static)
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.visit(constants.prodbaseUrl + constants.loadNewSafeSepoliaUrl)
-    main.acceptCookies()
     cy.wait(2000)
   })
 

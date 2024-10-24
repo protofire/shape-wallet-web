@@ -48,12 +48,11 @@ export const DecodedData = ({ txData, toInfo }: Props): ReactElement | null => {
     ? 'this Safe Account'
     : addressInfo?.name || toInfo?.name || txData.to.name
   const avatar = addressInfo?.logoUri || toInfo?.logoUri || txData.to.logoUri
+  const isFallback = !method && !txData?.dataDecoded?.parameters
 
   let decodedData = <></>
-  if (txData.dataDecoded) {
-    if (amountInWei === '0') {
-      decodedData = <MethodDetails data={txData.dataDecoded} addressInfoIndex={txData.addressInfoIndex} />
-    }
+  if (txData.dataDecoded && !isFallback) {
+    decodedData = <MethodDetails data={txData.dataDecoded} addressInfoIndex={txData.addressInfoIndex} />
   } else if (txData.hexData) {
     // When no decoded data, display raw hex data
     decodedData = <HexEncodedData title="Data (hex-encoded)" hexData={txData.hexData} />

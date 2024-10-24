@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { SvgIcon, Typography } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import FileOpenIcon from '@mui/icons-material/FileOpen'
@@ -10,6 +10,8 @@ import ExternalLink from '../ExternalLink'
 import { HELP_CENTER_URL } from '@/config/constants'
 import darkPalette from '@/components/theme/darkPalette'
 import ProtofireLogo from '@/public/images/protofire-logo.svg'
+import Link from 'next/link'
+import MUILink from '@mui/material/Link'
 
 const footerPages = [
   AppRoutes.welcome.index,
@@ -21,11 +23,25 @@ const footerPages = [
   AppRoutes.licenses,
 ]
 
+const FooterLink = ({ children, href }: { children: ReactNode; href: string }): ReactElement => {
+  return href ? (
+    <Link href={href} passHref legacyBehavior>
+      <MUILink>{children}</MUILink>
+    </Link>
+  ) : (
+    <MUILink>{children}</MUILink>
+  )
+}
+
 const Footer = (): ReactElement | null => {
   const router = useRouter()
 
   if (!footerPages.some((path) => router.pathname.startsWith(path))) {
     return null
+  }
+
+  const getHref = (path: string): string => {
+    return router.pathname === path ? '' : path
   }
 
   return (
@@ -35,6 +51,12 @@ const Footer = (): ReactElement | null => {
           <ExternalLink href="https://shape.network/" noIcon>
             <SvgIcon component={FileOpenIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> Shape Network
           </ExternalLink>
+        </li>
+        <li>
+          <FooterLink href={getHref(AppRoutes.terms)}>Terms</FooterLink>
+        </li>
+        <li>
+          <FooterLink href={getHref(AppRoutes.cookie)}>Cookie policy</FooterLink>
         </li>
         <li>
           <ExternalLink href={HELP_CENTER_URL} noIcon sx={{ span: { textDecoration: 'underline' } }}>
