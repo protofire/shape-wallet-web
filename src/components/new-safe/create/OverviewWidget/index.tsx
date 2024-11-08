@@ -10,6 +10,7 @@ import ConnectWalletButton from '@/components/common/ConnectWallet/ConnectWallet
 import { useDarkMode } from '@/hooks/useDarkMode'
 import type { ChainInfo } from '@safe-global/safe-gateway-typescript-sdk'
 import NetworkLogosList from '@/features/multichain/components/NetworkLogosList'
+import { useCurrentChain } from '@/hooks/useChains'
 
 const LOGO_DIMENSIONS = '22px'
 
