@@ -372,9 +372,7 @@ const FirstSteps = () => {
           </Grid>
 
           <Grid item xs={12} md={4}>
-            {isActivating ? (
-              <UsefulHintsWidget />
-            ) : isMultiSig || isReplayedSafe ? (
+            {isActivating ? null : isMultiSig || isReplayedSafe ? (
               <ActivateSafeWidget chain={chain} />
             ) : (
               <FirstTransactionWidget completed={hasOutgoingTransactions} />
