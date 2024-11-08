@@ -42,23 +42,25 @@ const addressItem = '[data-testid="address-item"]'
 const radioSelector = 'div[role="radiogroup"]'
 const rejectTxBtn = '[data-testid="reject-btn"]'
 const deleteTxModalBtn = '[data-testid="delete-tx-btn"]'
+const toggleUntrustedBtn = '[data-testid="toggle-untrusted"]'
 
 const viewTransactionBtn = 'View transaction'
 const transactionDetailsTitle = 'Transaction details'
 const QueueLabel = 'needs to be executed first'
 const TransactionSummary = 'Send '
-const transactionsPerHrStr = 'free transactions left this hour'
+const transactionsPerHrStr = 'free transactions left today'
 
 const maxAmountBtnStr = 'Max'
 const nextBtnStr = 'Next'
 const nativeTokenTransferStr = 'ETH'
 const yesStr = 'Yes, '
 const estimatedFeeStr = 'Estimated fee'
-const executeStr = 'Execute'
+export const executeStr = 'Execute'
 const editBtnStr = 'Edit'
 const executionParamsStr = 'Execution parameters'
 const noLaterStr = 'No, later'
 const signBtnStr = 'Sign'
+const confirmBtnStr = 'Confirm'
 const expandAllBtnStr = 'Expand all'
 const collapseAllBtnStr = 'Collapse all'
 export const messageNestedStr = `"nestedString": "Test message 3 off-chain"`
@@ -262,6 +264,10 @@ export function verifyExpandedDetails(data, warning) {
   if (warning) cy.get(warning).should('be.visible')
 }
 
+export function verifyAdvancedDetails(data) {
+  main.checkTextsExistWithinElement(accordionDetails, data)
+}
+
 export function verifyActions(data) {
   main.checkTextsExistWithinElement(accordionDetails, data)
 }
@@ -272,7 +278,7 @@ export function clickOnExpandableAction(data) {
   })
 }
 
-function clickOnAdvancedDetails() {
+export function clickOnAdvancedDetails() {
   cy.get(advancedDetails).click()
 }
 
@@ -484,7 +490,6 @@ export function openExecutionParamsModal() {
 
 export function verifyAndSubmitExecutionParams() {
   cy.contains(executionParamsStr).parents('form').as('Paramsform')
-
   const arrayNames = ['Wallet nonce', 'Max priority fee (Gwei)', 'Max fee (Gwei)', 'Gas limit']
   arrayNames.forEach((element) => {
     cy.get('@Paramsform').find('label').contains(`${element}`).next().find('input').should('not.be.disabled')
@@ -503,6 +508,14 @@ export function clickOnNoLaterOption() {
 
 export function clickOnSignTransactionBtn() {
   cy.get('button').contains(signBtnStr).click()
+}
+
+export function clickOnConfirmTransactionBtn() {
+  cy.get('button').contains(confirmBtnStr).click()
+}
+
+export function verifyConfirmTransactionBtnIsVisible() {
+  cy.get('button').contains(confirmBtnStr).should('be.visible')
 }
 
 export function waitForProposeRequest() {
@@ -594,4 +607,8 @@ export function verifyBulkExecuteBtnIsDisabled() {
   cy.get('button').contains(bulkExecuteBtnStr).should('be.disabled')
   cy.get('button').contains(bulkExecuteBtnStr).trigger('mouseover', { force: true })
   cy.contains(disabledBultExecuteBtnTooltip).should('exist')
+}
+
+export function toggleUntrustedTxs() {
+  cy.get(toggleUntrustedBtn).click()
 }

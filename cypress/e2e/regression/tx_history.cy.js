@@ -20,24 +20,22 @@ describe('Tx history tests 1', () => {
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.intercept(
       'GET',
       `**${constants.stagingCGWChains}${constants.networkKeys.sepolia}/${
         constants.stagingCGWSafes
       }${staticSafes.SEP_STATIC_SAFE_7.substring(4)}/transactions/history**`,
       (req) => {
-        req.url = `https://safe-client.staging.5afe.dev/v1/chains/11155111/safes/0x5912f6616c84024cD1aff0D5b55bb36F5180fFdb/transactions/history?timezone_offset=7200000&trusted=false&cursor=limit=100&offset=1`
+        req.url = `https://safe-client.staging.5afe.dev/v1/chains/11155111/safes/0x5912f6616c84024cD1aff0D5b55bb36F5180fFdb/transactions/history?timezone=Europe/Berlin&trusted=false&cursor=limit=100&offset=1`
         req.continue()
       },
     ).as('allTransactions')
 
     cy.visit(constants.transactionsHistoryUrl + staticSafes.SEP_STATIC_SAFE_7)
     cy.wait('@allTransactions')
-    main.acceptCookies()
   })
 
-  // TODO: Added to prod
+  // Added to prod
   // Account creation
   it('Verify summary for account creation', () => {
     createTx.verifySummaryByName(
@@ -47,7 +45,7 @@ describe('Tx history tests 1', () => {
     )
   })
 
-  // TODO: Added to prod
+  // Added to prod
   it('Verify exapanded details for account creation', () => {
     createTx.clickOnTransactionItemByName(typeCreateAccount.title)
     createTx.verifyExpandedDetails([
@@ -68,7 +66,7 @@ describe('Tx history tests 1', () => {
     createTx.verifyNumberOfExternalLinks(4)
   })
 
-  // TODO: Added to prod
+  // Added to prod
   // Token send
   it('Verify exapanded details for token send', () => {
     createTx.clickOnTransactionItemByName(typeSend.title, typeSend.summaryTxInfo)
@@ -80,7 +78,7 @@ describe('Tx history tests 1', () => {
     ])
   })
 
-  // TODO: Added to prod
+  // Added to prod
   // Spending limits
   it('Verify summary for setting spend limits', () => {
     createTx.verifySummaryByName(
@@ -91,7 +89,7 @@ describe('Tx history tests 1', () => {
     )
   })
 
-  // TODO: Added to prod
+  // Added to prod
   it('Verify exapanded details for initial spending limits setup', () => {
     createTx.clickOnTransactionItemByName(typeSpendingLimits.title, typeSpendingLimits.summaryTxInfo)
     createTx.verifyExpandedDetails(
@@ -105,7 +103,7 @@ describe('Tx history tests 1', () => {
     )
   })
 
-  // TODO: Added to prod
+  // Added to prod
   it('Verify that 3 actions exist in initial spending limits setup', () => {
     createTx.clickOnTransactionItemByName(typeSpendingLimits.title, typeSpendingLimits.summaryTxInfo)
     createTx.verifyActions([
@@ -150,7 +148,7 @@ describe('Tx history tests 1', () => {
     ])
   })
 
-  // TODO: Added to prod
+  // Added to prod
   it('Verify advanced details displayed in exapanded details for allowance deletion', () => {
     createTx.clickOnTransactionItemByName(typeDeleteAllowance.title, typeDeleteAllowance.summaryTxInfo)
     createTx.expandAdvancedDetails([typeDeleteAllowance.baseGas])

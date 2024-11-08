@@ -4,6 +4,7 @@ import * as swaps from '../pages/swaps.pages.js'
 import * as assets from '../pages/assets.pages.js'
 import { getSafes, CATEGORIES } from '../../support/safes/safesHandler.js'
 import * as wallet from '../../support/utils/wallet.js'
+import * as ls from '../../support/localstorage_data.js'
 
 let staticSafes = []
 const walletCredentials = JSON.parse(Cypress.env('CYPRESS_WALLET_CREDENTIALS'))
@@ -11,19 +12,16 @@ const signer = walletCredentials.OWNER_4_PRIVATE_KEY
 
 let iframeSelector = `iframe[src*="${constants.swapWidget}"]`
 
-describe('[SMOKE] Swaps token tests', () => {
+describe('[PROD] Swaps token tests', () => {
   before(async () => {
     staticSafes = await getSafes(CATEGORIES.static)
   })
 
   beforeEach(() => {
-    cy.clearLocalStorage()
     cy.visit(constants.prodbaseUrl + constants.BALANCE_URL + staticSafes.SEP_STATIC_SAFE_1)
-    main.acceptCookies()
   })
 
-  // TODO: Added to prod
-  it.skip(
+  it(
     'Verify that clicking the swap from assets tab, autofills that token automatically in the form',
     { defaultCommandTimeout: 30000 },
     () => {
@@ -38,14 +36,4 @@ describe('[SMOKE] Swaps token tests', () => {
       })
     },
   )
-
-  // TODO: Added to prod
-  // TODO: Check why expected number of buttons not displayed sometimes
-  it.skip('Verify swap button are displayed in assets table and dashboard', () => {
-    assets.selectTokenList(assets.tokenListOptions.allTokens)
-    main.verifyElementsCount(swaps.assetsSwapBtn, 4)
-    cy.visit(constants.homeUrl + staticSafes.SEP_STATIC_SAFE_1)
-    main.verifyElementsCount(swaps.assetsSwapBtn, 4)
-    main.verifyElementsCount(swaps.dashboardSwapBtn, 1)
-  })
 })

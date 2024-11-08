@@ -1,5 +1,4 @@
 import useWallet from '@/hooks/wallets/useWallet'
-import { assertWalletChain } from '@/services/tx/tx-sender/sdk'
 import { useContext, useEffect, useMemo } from 'react'
 import type { ReactElement } from 'react'
 import type { SafeTransaction } from '@safe-global/safe-core-sdk-types'
@@ -9,7 +8,6 @@ import { trackSafeAppTxCount } from '@/services/safe-apps/track-app-usage-count'
 import { getTxOrigin } from '@/utils/transactions'
 import { createMultiSendCallOnlyTx, createTx, dispatchSafeAppsTx } from '@/services/tx/tx-sender'
 import useOnboard from '@/hooks/wallets/useOnboard'
-import useSafeInfo from '@/hooks/useSafeInfo'
 import useHighlightHiddenTab from '@/hooks/useHighlightHiddenTab'
 import { SafeTxContext } from '@/components/tx-flow/SafeTxProvider'
 import { isTxValid } from '@/components/safe-apps/utils'
@@ -25,7 +23,6 @@ const ReviewSafeAppsTx = ({
   safeAppsTx: { txs, requestId, params, appId, app },
   onSubmit,
 }: ReviewSafeAppsTxProps): ReactElement => {
-  const { safe } = useSafeInfo()
   const onboard = useOnboard()
   const wallet = useWallet()
   const { safeTx, setSafeTx, safeTxError, setSafeTxError } = useContext(SafeTxContext)
@@ -55,7 +52,6 @@ const ReviewSafeAppsTx = ({
 
     let safeTxHash = ''
     try {
-      await assertWalletChain(onboard, safe.chainId)
       safeTxHash = await dispatchSafeAppsTx(safeTx, requestId, wallet.provider, txId)
     } catch (error) {
       setSafeTxError(asError(error))
