@@ -73,7 +73,7 @@ const SidebarFooter = (): ReactElement => {
       </ListItem>
       <ListItem disablePadding>
         <a target="_blank" rel="noopener noreferrer" href={NEW_SUGGESTION_FORM} style={{ width: '100%' }}>
-          <SidebarListItemButton style={{ backgroundColor: '#12FF80', color: 'black' }} onClick={handleBeamer}>
+          <SidebarListItemButton style={{ backgroundColor: '#12FF80', color: 'black' }}>
             <SidebarListItemIcon color="primary">
               <SuggestionIcon />
             </SidebarListItemIcon>
