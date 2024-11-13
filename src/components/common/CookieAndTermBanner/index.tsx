@@ -1,7 +1,7 @@
 import { useEffect, type ReactElement } from 'react'
 import classnames from 'classnames'
 import type { CheckboxProps } from '@mui/material'
-import { Grid, Button, Checkbox, FormControlLabel, Typography, Paper, SvgIcon, Box, Link } from '@mui/material'
+import { Grid, Button, Checkbox, FormControlLabel, Typography, Paper, SvgIcon, Box } from '@mui/material'
 import WarningIcon from '@/public/images/notifications/warning.svg'
 import { useForm } from 'react-hook-form'
 import { metadata } from '@/markdown/terms/terms.md'
@@ -17,6 +17,7 @@ import { selectCookieBanner, openCookieBanner, closeCookieBanner } from '@/store
 
 import css from './styles.module.css'
 import { AppRoutes } from '@/config/routes'
+import Link from 'next/link'
 
 const COOKIE_AND_TERM_WARNING: Record<CookieAndTermType, string> = {
   [CookieAndTermType.TERMS]: '',
@@ -85,15 +86,14 @@ export const CookieAndTermBanner = ({
         <Grid container alignItems="center">
           <Grid item xs>
             <Typography variant="body2" mb={2}>
-              By browsing this page, you accept our{' '}
-              <Link href={AppRoutes.terms} style={{ textDecoration: 'underline' }}>
+              By browsing this page, you accept our
+              <Link href={AppRoutes.terms} passHref legacyBehavior>
                 Terms & Conditions
               </Link>{' '}
-              (last updated October 2024) and the use of necessary cookies.{' '}
-              <Link href={AppRoutes.cookie} style={{ textDecoration: 'underline' }}>
+              (last updated November 2024) and the use of necessary cookies.{' '}
+              <Link href={AppRoutes.cookie} passHref legacyBehavior>
                 Cookie policy
-              </Link>
-              .
+              </Link>{' '}
             </Typography>
 
             <Grid container alignItems="center" gap={4}>
