@@ -90,7 +90,7 @@ export const CookieAndTermBanner = ({
               <Link href={AppRoutes.terms} passHref legacyBehavior>
                 Terms & Conditions
               </Link>{' '}
-              (last updated November 2024) and the use of necessary cookies.{' '}
+              and the use of necessary cookies.{' '}
               <Link href={AppRoutes.cookie} passHref legacyBehavior>
                 Cookie policy
               </Link>{' '}
