@@ -14,6 +14,7 @@ import SafeLogoWhite from '@/public/images/logo-no-text-white.svg'
 import { SafeTxContext } from '@/components/tx-flow/SafeTxProvider'
 import useIsSafeOwner from '@/hooks/useIsSafeOwner'
 import { useIsWalletProposer } from '@/hooks/useProposers'
+import { useDarkMode } from '@/hooks/useDarkMode'
 
 const TxStatusWidget = ({
   step,
@@ -35,6 +36,7 @@ const TxStatusWidget = ({
   const isSafeOwner = useIsSafeOwner()
   const isProposer = useIsWalletProposer()
   const isProposing = isProposer && !isSafeOwner
+  const isDarkMode = useDarkMode()
 
   const { executionInfo = undefined } = txSummary || {}
   const { confirmationsSubmitted = 0 } = isMultisigExecutionInfo(executionInfo) ? executionInfo : {}

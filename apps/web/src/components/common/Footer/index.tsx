@@ -12,6 +12,7 @@ import darkPalette from '@/components/theme/darkPalette'
 import ProtofireLogo from '@/public/images/protofire-logo.svg'
 import Link from 'next/link'
 import MUILink from '@mui/material/Link'
+import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 
 const footerPages = [
   AppRoutes.welcome.index,
@@ -48,11 +49,13 @@ const Footer = (): ReactElement | null => {
   return (
     <footer className={css.container}>
       <ul>
-        <li>
-          <ExternalLink href="https://shape.network/" noIcon>
-            <SvgIcon component={FileOpenIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> Shape Network
-          </ExternalLink>
-        </li>
+        {isOfficialHost ? (
+          <li>
+            <ExternalLink href="https://shape.network/" noIcon>
+              <SvgIcon component={FileOpenIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> Shape Network
+            </ExternalLink>
+          </li>
+        ) : null}
         <li>
           <FooterLink href={getHref(AppRoutes.terms)}>Terms</FooterLink>
         </li>
