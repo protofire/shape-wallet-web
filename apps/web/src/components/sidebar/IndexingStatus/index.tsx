@@ -12,13 +12,13 @@ const POLL_INTERVAL = 1000 * 60 // 1 minute
 
 const useIndexingStatus = () => {
   const chainId = useChainId()
-  const [count] = useIntervalCounter(POLL_INTERVAL)
+  useIntervalCounter(POLL_INTERVAL) // Keep the interval but don't use the count
 
   return useAsync(
     () => {
       return getIndexingStatus(chainId)
     },
-    [chainId, count],
+    [chainId],
     false,
   )
 }

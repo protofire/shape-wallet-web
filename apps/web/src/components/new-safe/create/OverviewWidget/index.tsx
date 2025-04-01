@@ -10,13 +10,11 @@ import ConnectWalletButton from '@/components/common/ConnectWallet/ConnectWallet
 import { useDarkMode } from '@/hooks/useDarkMode'
 import type { ChainInfo } from '@safe-global/safe-gateway-typescript-sdk'
 import NetworkLogosList from '@/features/multichain/components/NetworkLogosList'
-import { useCurrentChain } from '@/hooks/useChains'
 
 const LOGO_DIMENSIONS = '22px'
 
 const OverviewWidget = ({ safeName, networks }: { safeName: string; networks: ChainInfo[] }): ReactElement | null => {
   const wallet = useWallet()
-  const chain = useCurrentChain()
   const isDarkMode = useDarkMode()
 
   const rows = [

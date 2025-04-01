@@ -1,6 +1,7 @@
-import { TREZOR_APP_URL, TREZOR_EMAIL, WC_PROJECT_ID } from '@/config/constants'
+import { WC_PROJECT_ID } from '@/config/constants'
 import type { ChainInfo } from '@safe-global/safe-gateway-typescript-sdk'
 import type { InitOptions } from '@web3-onboard/core'
+import type { WalletInit } from '@web3-onboard/common'
 import coinbaseModule from '@web3-onboard/coinbase'
 import injectedWalletModule from '@web3-onboard/injected-wallets'
 import walletConnect from '@web3-onboard/walletconnect'
@@ -12,7 +13,6 @@ const prefersDarkMode = (): boolean => {
 }
 
 type WalletInits = InitOptions['wallets']
-type WalletInit = WalletInits extends Array<infer U> ? U : never
 
 const walletConnectV2 = (chain: ChainInfo) => {
   // WalletConnect v2 requires a project ID
@@ -39,7 +39,7 @@ const WALLET_MODULES: Partial<{ [_key in WALLET_KEYS]: (chain: ChainInfo) => Wal
   [WALLET_KEYS.WALLETCONNECT_V2]: (chain) => walletConnectV2(chain) as WalletInit,
   [WALLET_KEYS.COINBASE]: () => coinbaseModule({ darkMode: prefersDarkMode() }) as WalletInit,
   [WALLET_KEYS.LEDGER]: () => ledgerModule() as WalletInit,
-  [WALLET_KEYS.TREZOR]: () => trezorModule({ appUrl: TREZOR_APP_URL, email: TREZOR_EMAIL }) as WalletInit,
+  [WALLET_KEYS.TREZOR]: () => trezorModule() as WalletInit,
   [WALLET_KEYS.KEYSTONE]: () => keystoneModule() as WalletInit,
 }
 
@@ -61,15 +61,15 @@ export const getSupportedWallets = (chain: ChainInfo): WalletInits => {
 
   return enabledWallets.map(([, module]) => module(chain))
 }
-function ledgerModule(): import("@web3-onboard/common").WalletInit {
+
+function ledgerModule(): WalletInit {
   throw new Error('Function not implemented.')
 }
 
-function trezorModule(arg0: { appUrl: any; email: any }): import("@web3-onboard/common").WalletInit {
+function trezorModule(): WalletInit {
   throw new Error('Function not implemented.')
 }
 
-function keystoneModule(): import("@web3-onboard/common").WalletInit {
+function keystoneModule(): WalletInit {
   throw new Error('Function not implemented.')
 }
-
