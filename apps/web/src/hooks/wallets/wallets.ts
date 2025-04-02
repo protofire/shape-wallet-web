@@ -38,9 +38,6 @@ const WALLET_MODULES: Partial<{ [_key in WALLET_KEYS]: (chain: ChainInfo) => Wal
   [WALLET_KEYS.INJECTED]: () => injectedWalletModule() as WalletInit,
   [WALLET_KEYS.WALLETCONNECT_V2]: (chain) => walletConnectV2(chain) as WalletInit,
   [WALLET_KEYS.COINBASE]: () => coinbaseModule({ darkMode: prefersDarkMode() }) as WalletInit,
-  [WALLET_KEYS.LEDGER]: () => ledgerModule() as WalletInit,
-  [WALLET_KEYS.TREZOR]: () => trezorModule() as WalletInit,
-  [WALLET_KEYS.KEYSTONE]: () => keystoneModule() as WalletInit,
 }
 
 export const getAllWallets = (chain: ChainInfo): WalletInits => {
@@ -60,16 +57,4 @@ export const getSupportedWallets = (chain: ChainInfo): WalletInits => {
   }
 
   return enabledWallets.map(([, module]) => module(chain))
-}
-
-function ledgerModule(): WalletInit {
-  throw new Error('Function not implemented.')
-}
-
-function trezorModule(): WalletInit {
-  throw new Error('Function not implemented.')
-}
-
-function keystoneModule(): WalletInit {
-  throw new Error('Function not implemented.')
 }
