@@ -26,7 +26,7 @@ import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { useDarkMode } from '@/hooks/useDarkMode'
 import { useSafeTokenEnabled } from '@/hooks/useSafeTokenEnabled'
-import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
+//import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -49,7 +49,7 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
   const router = useRouter()
   const enableWc = useHasFeature(FEATURES.NATIVE_WALLETCONNECT)
   const isDarkMode = useDarkMode()
-  const isOfficialHost = useIsOfficialHost()
+  // const isOfficialHost = useIsOfficialHost()
 
   // If on the home page, the logo should link to the Accounts or Welcome page, otherwise to the home page
   const logoHref = getLogoLink(router)
@@ -82,7 +82,7 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
 
       <div className={classnames(css.element, css.logoMobile)}>
         <Link href={logoHref} passHref>
-          {isOfficialHost ? <SafeLogoMobile alt="Safe logo" /> : null}
+          <SafeLogoMobile alt="Safe logo" />
         </Link>
       </div>
 
